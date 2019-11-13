@@ -1,3 +1,8 @@
+#backImg {
+    height: 100%;
+    background-size:100% 100%;
+    -moz-background-size:100% 100%
+}
 body {
     position: relative;
     font-family: Verdana, "Lantinghei SC", "Hiragino Sans GB", "Microsoft Yahei", Helvetica, arial, \5b8b\4f53, sans-serif;
@@ -457,7 +462,7 @@ textarea{
     padding: 5px 30px 25px 30px;
     margin: 0 auto;
     margin-top: 30px;
-    background-color: #FFF;
+    background-color: rgba(66, 66, 66, 0.4);
     border: 1px solid #ddd;
     border-radius: 5px;
 }

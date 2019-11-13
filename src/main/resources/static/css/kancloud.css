@@ -11,7 +11,7 @@ body,form,ul,ol,table,input,button,p,h1,h2,h3,h4,h5,h6,blockquote,pre,dl,dt,dd,d
 
 body {
     color: #222;
-    background-color: #fff;
+    /*background-color: #fff;*/
     font-size: 14px;
     word-wrap: break-word;
     line-height: 1em;

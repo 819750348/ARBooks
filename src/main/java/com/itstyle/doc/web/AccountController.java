@@ -27,9 +27,6 @@ public class AccountController {
 	@RequestMapping(value="login",method=RequestMethod.GET)
     public String  login(ModelMap map) {
 		 logger.info("用户登陆 ");
-		 map.addAttribute("SITE_NAME", Constans.mapOptions.get(Option.SITE_NAME.getCode()));
-		 map.addAttribute("ENABLED_REGISTER", Constans.mapOptions.get(Option.ENABLED_REGISTER.getCode()));
-		 map.addAttribute("ENABLED_CAPTCHA", Constans.mapOptions.get(Option.ENABLED_CAPTCHA.getCode()));
 		 return "account/login";
     }
 	@RequestMapping(value="login",method=RequestMethod.POST)
@@ -60,9 +57,6 @@ public class AccountController {
 	@RequestMapping(value="register",method=RequestMethod.GET)
     public String  register(ModelMap map) {
 		 logger.info("用户注册 ");
-		 map.addAttribute("SITE_NAME", Constans.mapOptions.get(Option.SITE_NAME.getCode()));
-		 map.addAttribute("ENABLED_REGISTER", Constans.mapOptions.get(Option.ENABLED_REGISTER.getCode()));
-		 map.addAttribute("ENABLED_CAPTCHA", Constans.mapOptions.get(Option.ENABLED_CAPTCHA.getCode()));
 		 return "account/register";
     }
 	@RequestMapping(value="register",method=RequestMethod.POST)
@@ -73,6 +67,7 @@ public class AccountController {
 		 String vrifyCode =  (String) request.getSession().getAttribute("vrifyCode");
 		 if(vrifyCode.equalsIgnoreCase(code)){
 			 if(user==null){
+				 member.setPassword(MD5Util.MD5(member.getPassword()));
 				 memberRepository.save(member);
 				 result.setCode(Constans.SUCCESS);
 			 }else{
@@ -88,7 +83,7 @@ public class AccountController {
 	@RequestMapping(value="find_password",method=RequestMethod.GET)
     public String  findPassword(ModelMap map) {
 		 logger.info("找回密码");
-		 map.addAttribute("SITE_NAME", Constans.mapOptions.get(Option.SITE_NAME.getCode()));
+//		 map.addAttribute("SITE_NAME", Constans.mapOptions.get(Option.SITE_NAME.getCode()));
 		 return "account/find_password_setp1";
     }
 	@RequestMapping(value="find_password",method=RequestMethod.POST)
@@ -114,5 +109,11 @@ public class AccountController {
 	public String logout(HttpServletRequest request){
 		request.getSession().setAttribute(Constans.CURRENT_USER, null);
 		return "redirect:index";
+	}
+    //成功后跳转页面
+	@RequestMapping(value="success",method=RequestMethod.GET)
+	public String  success(ModelMap map) {
+		logger.info("成功登陆 ");
+		return "account/success";
 	}
 }
